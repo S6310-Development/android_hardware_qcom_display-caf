@@ -8,6 +8,10 @@ common_includes += hardware/qcom/display-caf/libexternal
 common_includes += hardware/qcom/display-caf/libqservice
 common_includes += hardware/qcom/display-caf/libvirtual
 
+ifeq ($(QCOM_BSP_WITH_GENLOCK),true)
+    common_includes += hardware/qcom/display-caf/libgenlock
+endif
+
 ifeq ($(TARGET_USES_POST_PROCESSING),true)
     common_flags     += -DUSES_POST_PROCESSING
     common_includes  += $(TARGET_OUT_HEADERS)/pp/inc
@@ -38,6 +42,7 @@ ifeq ($(TARGET_USES_QCOM_BSP),true)
 endif
 
 ifeq ($(call is-vendor-board-platform,QCOM),true)
+
 common_deps += $(TARGET_OUT_INTERMEDIATES)/KERNEL_OBJ/usr
 kernel_includes += $(TARGET_OUT_INTERMEDIATES)/KERNEL_OBJ/usr/include
 endif
